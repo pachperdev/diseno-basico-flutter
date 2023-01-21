@@ -6,12 +6,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: const [
-          Banner(),
-          Title(),
-          RowActions(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            Banner(),
+            Title(),
+            RowActions(),
+            Description(),
+          ],
+        ),
       ),
     );
   }
@@ -95,48 +98,62 @@ class RowActions extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Column(
-            children: const [
-              Icon(
-                Icons.call,
-                color: Colors.blue,
-                size: 30,
-              ),
-              Text(
-                'Call',
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-              )
-            ],
-          ),
-          Column(
-            children: const [
-              Icon(
-                Icons.call,
-                color: Colors.blue,
-                size: 30,
-              ),
-              Text(
-                'Call',
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-              )
-            ],
-          ),
-          Column(
-            children: const [
-              Icon(
-                Icons.call,
-                color: Colors.blue,
-                size: 30,
-              ),
-              Text(
-                'Call',
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-              )
-            ],
-          ),
+        children: const [
+          CustomButton(icon: Icons.call, textIcon: 'Call'),
+          CustomButton(icon: Icons.navigation_rounded, textIcon: 'Route'),
+          CustomButton(icon: Icons.share, textIcon: 'Share'),
         ],
       ),
     );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final IconData icon;
+  final String textIcon;
+
+  const CustomButton({
+    Key? key,
+    required this.icon,
+    required this.textIcon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(
+          icon,
+          color: Colors.blue,
+          size: 30,
+        ),
+        Text(
+          textIcon,
+          style: const TextStyle(color: Colors.blue, fontSize: 16),
+        )
+      ],
+    );
+  }
+}
+
+class Description extends StatelessWidget {
+  const Description({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Column(
+          children: const [
+            Text(
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 16),
+              'Proident consectetur exercitation culpa magna id. Pariatur id eu velit ex sunt exercitation officia labore est sunt dolore pariatur quis. Laboris eu deserunt velit reprehenderit dolore. Deserunt commodo fugiat sint elit sit exercitation fugiat. Anim aute ullamco nulla adipisicing pariatur eiusmod est enim cupidatat.',
+            ),
+            SizedBox(height: 100),
+          ],
+        ));
   }
 }
